@@ -4,12 +4,12 @@ import ReactPlayer from "react-player";
 import { Typography, Box, Stack } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
-import { Videos, Loader } from "./";
+import { Videos } from "./";
 import { fetchFromAPI } from "../utils/fetchFromAPI";
 
 const VideoDetail = () => {
   const [videoDetail, setVideoDetail] = useState(null);
-  const [videos, setVideos] = useState(null);
+  const [videos, setVideos] = useState([]); // Initialize as empty array
   const { id } = useParams();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const VideoDetail = () => {
     );
   }, [id]);
 
-  if (!videoDetail?.snippet) return <Loader />;
+  if (!videoDetail?.snippet) return <Typography>Loading...</Typography>; // Updated
 
   const {
     snippet: { title, channelId, channelTitle },
@@ -77,7 +77,8 @@ const VideoDetail = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Videos videos={videos} direction="column" />
+          {/* Updated - Passing videos with fallback handling */}
+          <Videos videos={videos || []} direction="column" />
         </Box>
       </Stack>
     </Box>

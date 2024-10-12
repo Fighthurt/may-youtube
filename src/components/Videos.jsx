@@ -1,9 +1,9 @@
-import { Stack, Box } from '@mui/material';
-import { VideoCard, ChannelCard } from './';
-
-
+import { Stack, Box, Typography } from "@mui/material";
+import { VideoCard, ChannelCard } from "./";
 
 const Videos = ({ videos }) => {
+  // Handle case where videos array might be empty or null
+  if (!videos?.length) return <Typography>Loading...</Typography>;
 
   return (
     <Stack direction="row" flexWrap="wrap" justifyContent="start" gap={2}>
@@ -15,6 +15,6 @@ const Videos = ({ videos }) => {
       ))}
     </Stack>
   );
-}
+};
 
-export default Videos
+export default Videos;
